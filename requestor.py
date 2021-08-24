@@ -21,9 +21,9 @@ import worker
 
 # CLI arguments definition
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("--hash", type=Path, default=Path("data/hash.json"))
+#arg_parser.add_argument("--hash", type=Path, default=Path("data/hash.json"))
 arg_parser.add_argument("--subnet", type=str, default="devnet-beta.2")
-arg_parser.add_argument("--words", type=Path, default=Path("data/words.txt"))
+arg_parser.add_argument("--words", type=Path, default=Path("data/SCG_data.csv"))
 
 # Container object for parsed arguments
 args = argparse.Namespace()
@@ -55,7 +55,7 @@ async def steps(context: WorkContext, tasks: AsyncIterable[Task]):
     Tasks are provided from a common, asynchronous queue.
     The signature of this function cannot change, as it's used internally by `Executor`.
     """
-    context.send_file(str(args.hash), str(worker.HASH_PATH))
+    #context.send_file(str(args.hash), str(worker.HASH_PATH))
 
     async for task in tasks:
         context.send_json(str(worker.WORDS_PATH), task.data)
@@ -76,7 +76,7 @@ async def steps(context: WorkContext, tasks: AsyncIterable[Task]):
 async def main():
     # Set of parameters for the VM run by each of the providers
     package = await vm.repo(
-        image_hash="d7098f41e0a4dfbc43c8b58b672dcf69a5ded996d5466c1b6c46c428",
+        image_hash="8b64724a1331ec2a21399d3c65cd0372433c162631f554acf09f3ed9",
         min_mem_gib=2.0,
         min_storage_gib=2.5,
     )
@@ -99,7 +99,7 @@ async def main():
                 break
 
         if result:
-            print(f"Found matching word: {result}")
+            print(f"\n {result}\n")
         else:
             print("No matching words found.")
 

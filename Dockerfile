@@ -3,12 +3,13 @@
 FROM python:3.8.7-slim
 
 RUN pip install --upgrade pip
-RUN pip instal --upgrade pip wheel
+RUN pip install --upgrade pip wheel
 RUN pip install matplotlib
 RUN pip install numpy
 RUN pip install pandas
 RUN pip install influxdb
 RUN pip install sklearn
+RUN pip install PyWavelets
 
 VOLUME /golem/input /golem/output
 COPY worker.py /golem/entrypoint/
