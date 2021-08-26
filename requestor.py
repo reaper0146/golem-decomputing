@@ -58,13 +58,13 @@ async def steps(context: WorkContext, tasks: AsyncIterable[Task]):
     #context.send_file(str(args.hash), str(worker.HASH_PATH))
 
     async for task in tasks:
-        context.send_json(str(worker.WORDS_PATH), task.data)
+        context.send_json(worker.WORDS_PATH, task.data)
 
-        context.run(str(ENTRYPOINT_PATH))
+        context.run(ENTRYPOINT_PATH)
 
         # Create a temporary file to avoid overwriting incoming results
-        output_file = 'out.json' #Path(worker.RESULT_PATH) # / str(uuid4()) #NamedTemporaryFile()
-        context.download_file(str(worker.RESULT_PATH), output_file)
+        output_file = Path(worker.RESULT_PATH) # / str(uuid4()) #NamedTemporaryFile()
+        context.download_file(worker.RESULT_PATH, str(output_file))
 
         # Pass the prepared sequence of steps to Executor
         yield context.commit()
