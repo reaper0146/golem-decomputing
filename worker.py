@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 ENCODING = "utf-8"
 
-#HASH_PATH = Path("golem/input/hash.json")
+HASH_PATH = Path("golem/input/hash.json")
 WORDS_PATH = Path("golem/input/SCG_data.csv")
 RESULT_PATH = Path("golem/output/result.json")
 
